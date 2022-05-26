@@ -8,12 +8,15 @@ function App() {
   const [taskCount,setTaskCount] = useState(0)
 
   const submitText = (text) => {
-    const data = {
-      text: text,
-      done: false
+    if(text.length > 1){
+      const data = {
+        text: text,
+        done: false,
+        visible: true
+      }
+      setTaskList([...taskList, data])
+      setTaskCount(taskCount + 1)
     }
-    setTaskList([...taskList, data])
-    setTaskCount(taskCount + 1)
   }
 
   const deleteTask = (key) => {
@@ -24,8 +27,38 @@ function App() {
   }
 
   const checkTask = (key) => {
-    taskList[key].done = true
+    taskList[key].done = taskList[key].done ? false : true
     setTaskList([...taskList])
+    if(taskList[key].done){
+      setTaskCount(taskCount - 1)
+    }else{
+      setTaskCount(taskCount + 1)
+    }
+  }
+
+  const sortList = (sortType) => {
+    switch(sortType){
+      case 'all':
+        taskList.map(task => (task.visible = true))
+        setTaskList([...taskList])
+        break
+      case 'active':
+        taskList.map(task => (
+          task.visible = task.done ? false : true
+        ))
+        setTaskList([...taskList])
+        break
+      case 'completed':
+        taskList.map(task => (
+          task.visible = task.done ? true : false
+        ))
+        setTaskList([...taskList])
+        break
+        default:
+          taskList.map(task => (task.visible = true))
+          setTaskList([...taskList])
+        break
+    }
   }
 
   return (
@@ -36,7 +69,7 @@ function App() {
           <button className="toggle-theme" aria-label="change theme color" title="change theme color"></button>
         </div>
         <Input response={submitText}/>
-        <TaskList taskList={taskList} taskCount={taskCount} checkTask={checkTask} deleteTask={deleteTask}/>
+        <TaskList taskList={taskList} taskCount={taskCount} checkTask={checkTask} deleteTask={deleteTask} sortList={sortList}/>
       </div>
     </div>
   );
