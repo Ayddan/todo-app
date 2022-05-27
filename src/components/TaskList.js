@@ -18,6 +18,10 @@ class TaskList extends React.Component {
         this.props.sortList(e.target.getAttribute('data-value'));
     }
 
+    clearCompleted = () => {
+        this.props.clearCompleted();
+    }
+
     render() {
         return <div className="todo-task-list-wrapper">
             <ul className="todo-task-list">
@@ -44,7 +48,7 @@ class TaskList extends React.Component {
                         <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="completed" onClick={(e)=>{this.sortList(e)}}>Completed</button>
                     </li>
                 </ul>
-                <button className="clear-completed-button" aria-label="Delete" title="Delete">Clear Completed</button>
+                <button className="clear-completed-button" aria-label="Delete" title="Delete" onClick={()=>{this.clearCompleted()}}>Clear Completed</button>
             </div>
         </div>
     }

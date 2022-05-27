@@ -6,6 +6,7 @@ import TaskList from './components/TaskList';
 function App() {
   const [taskList,setTaskList] = useState([])
   const [taskCount,setTaskCount] = useState(0)
+  const [theme,setTheme] = useState("light")
 
   const submitText = (text) => {
     if(text.length > 1){
@@ -61,15 +62,24 @@ function App() {
     }
   }
 
+  const clearCompleted = () => {
+    setTaskList(taskList.filter(item => !item.done))
+  }
+
+  const toogleTheme = () => {
+    theme = theme === 'light' ? setTheme('dark') : setTheme('light');
+  }
+
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
+      <div className='page-background'></div>
       <div className="todo-list-wrapper">
         <div className="todo-head">
           <h1>todo</h1>
-          <button className="toggle-theme" aria-label="change theme color" title="change theme color"></button>
+          <button className="toggle-theme" aria-label="change theme color" title="change theme color" onClick={toogleTheme}></button>
         </div>
         <Input response={submitText}/>
-        <TaskList taskList={taskList} taskCount={taskCount} checkTask={checkTask} deleteTask={deleteTask} sortList={sortList}/>
+        <TaskList taskList={taskList} taskCount={taskCount} checkTask={checkTask} deleteTask={deleteTask} sortList={sortList} clearCompleted={clearCompleted}/>
       </div>
     </div>
   );

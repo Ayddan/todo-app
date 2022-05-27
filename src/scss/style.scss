@@ -1,11 +1,26 @@
+.light{
+    --body-color: #fff;
+    --background-image: url("../public/assets/images/bg-desktop-light.jpg");
+    --body-background: #fff;
+    --secondary-background-color: hsl(0deg 0% 100%);
+    --text-color: hsl(235, 19%, 35%);
+    --list-border-color: 1px solid hsl(236, 33%, 92%);
+    --toggle-button-background: url("../public/assets/images/svg/icon-moon.svg");
+}
+
+.dark{
+    --body-color: #fff;
+    --background-image: url("../public/assets/images/bg-desktop-dark.jpg");
+    --body-background: hsl(235, 21%, 11%);
+    --secondary-background-color: hsl(235, 24%, 19%);
+    --text-color: hsl(234, 39%, 85%);
+    --list-border-color: 1px solid hsl(236, 33%, 92%);
+    --toggle-button-background: url("../public/assets/images/svg/icon-sun.svg");
+}
+
 body{ 
-    background-color: rgb(117, 117, 117);
-    background-image: url("../public/assets/images/bg-desktop-light.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: top center;
     font-family: 'Josefin Sans', sans-serif;
-    color: hsl(235, 19%, 35%);
+    color: var(--text-color);
     font-weight: 700;
 }
 
@@ -31,12 +46,27 @@ button:hover{
 .App{
     display: flex;
     justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    background: var(--body-background);
+}
+
+.page-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 350px;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
 }
 
 .todo-list-wrapper{
     width: 100%;
     max-width: 575px;
+    margin-top: 50px;
+    z-index: 1;
 }
 
 // Head of todo list
@@ -53,7 +83,7 @@ button:hover{
     padding: 0;
     border: none;
     background: none;
-    background-image: url("../public/assets/images/svg/icon-moon.svg");
+    background-image: var(--toggle-button-background);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -65,9 +95,10 @@ button:hover{
     display: flex;
     align-items: center;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: var(--secondary-background-color);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 20px 0px #00000026;
     label {
         display: none;
     }
@@ -79,6 +110,8 @@ button:hover{
         font-size: 18px;
         font-family: 'Josefin Sans', sans-serif;
         caret-color: hsl(220, 98%, 61%);
+        background-color: var(--secondary-background-color);
+        color: var(--text-color);
         &:focus-visible{
             border: none;
             outline: none;
@@ -116,14 +149,21 @@ button:hover{
 }
 
 .todo-task-list-wrapper{
-    background-color: #fff;
+    background-color: var(--secondary-background-color);
     border-radius: 5px;
     padding: 0 15px;
+    box-shadow: 0 0 20px 0px #00000026;
+    .todo-task-list{
+        margin-top: 30px;
+    }
     .todo-list-task-element{
         min-height: 70px;
         display: flex;
         align-items: center;
         border-bottom: 1px solid hsl(236, 33%, 92%);
+        p{
+            color: var(--text-color);
+        }
         &:hover{
             cursor: pointer;
             .list-delete{
