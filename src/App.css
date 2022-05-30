@@ -46,6 +46,7 @@ button:hover {
 .App {
   display: flex;
   justify-content: center;
+  padding: 0 20px;
   min-height: 100vh;
   background: var(--body-background);
 }
@@ -60,6 +61,11 @@ button:hover {
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 0;
+}
+@media screen and (max-width: 620px) {
+  .page-background {
+    height: 225px;
+  }
 }
 
 .todo-list-wrapper {
@@ -190,14 +196,11 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 50px;
 }
 .todo-list-tools .count-list {
   font-size: 14px;
   color: #d2d3db;
-}
-.todo-list-tools .list-filter-wrapper {
-  display: flex;
-  align-items: center;
 }
 .todo-list-tools button {
   border: none;
@@ -210,6 +213,33 @@ button:hover {
 }
 .todo-list-tools button.active {
   color: #3a7bfd;
+}
+
+.list-filter-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list-filter-wrapper button {
+  border: none;
+  background: none;
+  color: #d2d3db;
+  font-weight: 700;
+}
+.list-filter-wrapper button:hover {
+  color: #484b6a;
+}
+.list-filter-wrapper button.active {
+  color: #3a7bfd;
+}
+@media screen and (max-width: 620px) {
+  .list-filter-wrapper {
+    background-color: var(--secondary-background-color);
+    border-radius: 5px;
+    padding: 0 15px;
+    box-shadow: 0 0 20px 0px #00000026;
+    min-height: 50px;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */

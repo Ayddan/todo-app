@@ -23,7 +23,8 @@ class TaskList extends React.Component {
     }
 
     render() {
-        return <div className="todo-task-list-wrapper">
+        return <>
+        <div className="todo-task-list-wrapper">
             <ul className="todo-task-list">
                     {this.props.taskList ? this.props.taskList.map(task => {
                         if(task.visible){
@@ -37,20 +38,38 @@ class TaskList extends React.Component {
             </ul>
             <div className="todo-list-tools">
                 <span className="count-list">{this.props.taskCount} items left</span>
-                <ul className="list-filter-wrapper">
-                    <li>
-                        <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="all" onClick={(e)=>{this.sortList(e)}}>All</button>
-                    </li>
-                    <li>
-                        <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="active" onClick={(e)=>{this.sortList(e)}}>Active</button>
-                    </li>
-                    <li>
-                        <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="completed" onClick={(e)=>{this.sortList(e)}}>Completed</button>
-                    </li>
-                </ul>
+                {!this.props.mobile ? 
+                    <ul className="list-filter-wrapper">
+                        <li>
+                            <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="all" onClick={(e)=>{this.sortList(e)}}>All</button>
+                        </li>
+                        <li>
+                            <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="active" onClick={(e)=>{this.sortList(e)}}>Active</button>
+                        </li>
+                        <li>
+                            <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="completed" onClick={(e)=>{this.sortList(e)}}>Completed</button>
+                        </li>
+                    </ul> 
+                    : null
+                }
                 <button className="clear-completed-button" aria-label="Delete" title="Delete" onClick={()=>{this.clearCompleted()}}>Clear Completed</button>
             </div>
         </div>
+        {this.props.mobile ? 
+            <ul className="list-filter-wrapper">
+                <li>
+                    <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="all" onClick={(e)=>{this.sortList(e)}}>All</button>
+                </li>
+                <li>
+                    <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="active" onClick={(e)=>{this.sortList(e)}}>Active</button>
+                </li>
+                <li>
+                    <button className="list-filter-element" aria-label="Delete" title="Delete" data-value="completed" onClick={(e)=>{this.sortList(e)}}>Completed</button>
+                </li>
+            </ul> 
+            : null
+        }
+        </>
     }
 }
 

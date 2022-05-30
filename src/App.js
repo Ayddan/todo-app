@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Input from './components/Input';
 import TaskList from './components/TaskList';
@@ -7,6 +7,12 @@ function App() {
   const [taskList,setTaskList] = useState([])
   const [taskCount,setTaskCount] = useState(0)
   const [theme,setTheme] = useState("light")
+  const [width, setWidth] = useState(window.innerWidth);
+  const breakpoint = 620;
+
+  useEffect(()=>{
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+  })
 
   const submitText = (text) => {
     if(text.length > 1){
@@ -79,7 +85,7 @@ function App() {
           <button className="toggle-theme" aria-label="change theme color" title="change theme color" onClick={toogleTheme}></button>
         </div>
         <Input response={submitText}/>
-        <TaskList taskList={taskList} taskCount={taskCount} checkTask={checkTask} deleteTask={deleteTask} sortList={sortList} clearCompleted={clearCompleted}/>
+        <TaskList taskList={taskList} taskCount={taskCount} checkTask={checkTask} deleteTask={deleteTask} sortList={sortList} clearCompleted={clearCompleted} mobile={width < breakpoint ? true : false}/>
       </div>
     </div>
   );
